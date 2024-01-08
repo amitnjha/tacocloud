@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Taco Cloud</title>
+    </head>
+    <body>
+        <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}" >
+            <h1>Order your Taco ....</h1>
+            <img th:src="@{/images/TacoCloud.png}" />
+            <h3>Your Tacos in this order</h3>
+            <a th:href="@{/design/design}" id="another">Design another Taco</a>
+            <ul>
+                <li th:each="taco : ${tacoOrder.tacos}">
+                    <span th:text="${taco.name}">taco name</span>
+                </li>
+            </ul>
+            <h3>Deliver my taco masterpieces to ...</h3>
+            <label for="deliveryName">Name:</label>
+            <input type="text" th:field="*{deliveryName}" />
+            <br/>
+
+            <label for="deliveryStreet">Street Address:</label>
+            <input type="text" th:field="*{deliveryStreet}" />
+            <br/>
+
+            <label for="deliveryCity">City:</label>
+            <input type="text" th:field="*{deliveryCity}" />
+            <br/>
+
+            <label for="delieryState">State:</label>
+            <input type="text" th:field="*{deliveryState}" />
+            <br/>
+
+            <label for="delieryZip">Zip Code:</label>
+            <input type="text" th:field="*{deliveryZip}" />
+            <br/>
+
+            <h3>Here is how I will pay</h3>
+            <label for="ccNumber">Credit Card#</label>
+            <input type="text" th:field="*{ccNumber}" />
+            <br/>
+
+            <label for="ccExpiration">Expiration:</label>
+            <input type="text" th:field="*{ccExpiration}" />
+            <br/>
+
+            <label for="ccCVV">CVV:</label>
+            <input type="text" th:field="*{ccCVV}" />
+            <span th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">ccCVV error</span>
+            <br/>
+            <input type="submit" value="Submit Order" />
+        </form>
+    </body>
+</html>
